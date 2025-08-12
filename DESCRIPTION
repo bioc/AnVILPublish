@@ -41,6 +41,7 @@ Imports:
 Suggests:
     knitr,
     BiocStyle,
+    GCPtools,
     testthat (>= 3.0.0)
 biocViews: Infrastructure, Software
 Encoding: UTF-8

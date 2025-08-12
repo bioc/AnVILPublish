@@ -36,15 +36,15 @@ available to copy notebook files to the workspace. Test availability
 with
 
 ``` r
-AnVILGCP::gcloud_exists()
+GCPtools::gcloud_exists()
 ```
 
 and verify that the account and project are appropriate (consistent with
 AnVIL credentials) for use with AnVIL
 
 ``` r
-AnVILGCP::gcloud_account()
-AnVILGCP::gcloud_project()
+GCPtools::gcloud_account()
+GCPtools::gcloud_project()
 ```
 
 Note that these be used to set, as well as interrogate, the account and
