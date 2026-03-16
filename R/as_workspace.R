@@ -1,18 +1,3 @@
-#' @importFrom jsonlite unbox
-.create_workspace <-
-    function(namespace, name)
-{
-    createWorkspace <- .get_terra()$createWorkspace
-    response <- createWorkspace(
-        namespace = namespace, name = name,
-        attributes = list(
-            description = unbox("New workspace")
-        )
-    )
-    if (status_code(response) >= 400L)
-        .stop(response, namespace, name, "create workspace failed")
-}
-
 .name_from_path <-
     function(path)
 {
@@ -231,7 +216,7 @@ as_workspace <-
 
     ## create / update workspace
     if (create) {
-        .create_workspace(namespace, name)
+        create_workspace(namespace, name)
     } else if (!update) {
         message("use 'update = TRUE' to make changes to the workspace")
     }
@@ -282,3 +267,4 @@ as_workspace <-
         paste0("https://anvil.terra.bio/#workspaces/", namespace, "/", name)
     invisible(wkspc)
 }
+

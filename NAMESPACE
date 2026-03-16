@@ -3,6 +3,7 @@
 export(add_access)
 export(as_notebook)
 export(as_workspace)
+export(create_workspace)
 importFrom(AnVIL,Terra)
 importFrom(AnVILGCP,avcopy)
 importFrom(AnVILGCP,avstorage)
