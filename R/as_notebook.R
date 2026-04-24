@@ -126,7 +126,7 @@
     function(rmd_paths, quarto)
 {
     for(rmd_path in rmd_paths) {
-        if (quarto == "render") {
+        if (identical(quarto, "render")) {
             system2("quarto", c("render", rmd_path, "--to", "ipynb"))
         } else {
             system2("quarto", c("convert", rmd_path))
@@ -189,8 +189,8 @@ as_notebook <-
         type = c('ipynb', 'rmd', 'both'),
         quarto = c('render', 'convert'))
 {
-    type = match.arg(type)
-    quarto = match.arg(quarto)
+    type <- match.arg(type)
+    quarto <- match.arg(quarto)
     stopifnot(
         isCharacter(rmd_paths), all(file.exists(rmd_paths)),
         isScalarCharacter(namespace),
