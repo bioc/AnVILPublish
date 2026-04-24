@@ -1,3 +1,46 @@
+# AnVILPublish 1.22.0
+
+## New Features
+
+- (v. 1.21.1) Export `create_workspace()` for creating a new AnVIL workspace
+  without necessarily populating it from an R package.
+
+# AnVILPublish 1.20.0
+
+## Significant User-Visible Changes
+
+- (v. 1.19.0) Update to use `GCPtools` for `gcloud` checks.
+
+# AnVILPublish 1.18.0
+
+- No significant changes.
+
+# AnVILPublish 1.16.0
+
+## Significant User-Visible Changes
+
+- (v. 1.15.0) Use `AnVILGCP` for storage and copying functions,
+  replacing `AnVIL` usage.
+
+## Documentation
+
+- (v. 1.15.0) Use `README.Rmd` script for `README.md`.
+
+- (v. 1.15.2) Update `AnVILPublishIntro.Rmd` and `README.md`.
+
+# AnVILPublish 1.14.0
+
+## New Features
+
+- (v. 1.13.2) Move `BiocManager` to `Imports` as it is used in code.
+
+- (v. 1.13.1) Use `BiocBaseUtils` for internal utility functions.
+
+## Documentation
+
+- (v. 1.13.0) Add a note to the vignette clarifying that only Google Cloud
+  Platform workspaces are supported.
+
 # AnVILPublish 1.12.0
 
 ## Bug Fixes
