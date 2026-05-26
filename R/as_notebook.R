@@ -182,6 +182,12 @@
 #'
 #' @importFrom BiocBaseUtils isCharacter isScalarCharacter
 #'
+#' @examplesIf interactive()
+#' as_notebook(
+#'     "vignettes/bioc2024.Rmd",
+#'     "landmarkanvil2",
+#'     "Bioconductor-Package-AnVILHCAR"
+#' )
 #' @export
 as_notebook <-
     function(

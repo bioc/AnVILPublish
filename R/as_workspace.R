@@ -192,6 +192,13 @@
 #' @importFrom whisker whisker.render
 #' @importFrom BiocBaseUtils isScalarLogical
 #'
+#' @examplesIf interactive()
+#' as_workspace(
+#'     path = "/home/user/bioc/AnVILHCAR",
+#'     namespace = "landmarkanvil2",
+#'     name = "Bioconductor-Package-AnVILHCAR",
+#'     create = TRUE
+#' )
 #' @export
 as_workspace <-
     function(path, namespace, name = NULL, create = FALSE, update = FALSE,

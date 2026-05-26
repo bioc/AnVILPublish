@@ -22,3 +22,8 @@ credentials.}
 permissions. Users gain access to the workspace (and others) by
 being added to the Bioconductor_User group.
 }
+\examples{
+\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
+add_access("landmarkanvil2", "Bioconductor-Package-AnVILHCAR")
+\dontshow{\}) # examplesIf}
+}

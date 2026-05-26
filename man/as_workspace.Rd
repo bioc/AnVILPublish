@@ -59,3 +59,13 @@ Information from the DESCRIPTION file and Rmd YAML are
 used to populate the 'DASHBOARD' tab.  See \code{?as_notebook()} for
 details on how vignettes are processed to notebooks.
 }
+\examples{
+\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
+as_workspace(
+    path = "/home/user/bioc/AnVILHCAR",
+    namespace = "landmarkanvil2",
+    name = "Bioconductor-Package-AnVILHCAR",
+    create = TRUE
+)
+\dontshow{\}) # examplesIf}
+}

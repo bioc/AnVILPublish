@@ -48,3 +48,12 @@ See the vignette
 details on the conversion process; best results are obtained
 when Quarto software is available.
 }
+\examples{
+\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
+as_notebook(
+    "vignettes/bioc2024.Rmd",
+    "landmarkanvil2",
+    "Bioconductor-Package-AnVILHCAR"
+)
+\dontshow{\}) # examplesIf}
+}

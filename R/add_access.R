@@ -37,6 +37,8 @@
 #'
 #' @importFrom BiocBaseUtils isScalarCharacter
 #'
+#' @examplesIf interactive()
+#' add_access("landmarkanvil2", "Bioconductor-Package-AnVILHCAR")
 #' @export
 add_access <-
     function(namespace, name)
