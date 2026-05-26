@@ -32,7 +32,7 @@ notebooks ready for evaluation in AnVIL.
 
 If necessary, install the AnVILPublish library
 
-```{r}
+```{r, eval = FALSE}
 if (!"AnVILPublish" %in% rownames(installed.packages()))
     BiocManager::install("AnVILPublish")
 ```
