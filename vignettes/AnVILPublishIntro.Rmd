@@ -3,7 +3,6 @@ title: "Publishing R / Bioconductor Packages To AnVIL Workspaces"
 author:
 - name: Martin Morgan
   affiliation: Roswell Park Comprehensive Cancer Center
-  email: Martin.Morgan@RoswellPark.org
 package: AnVILPublish
 output:
   BiocStyle::html_document
