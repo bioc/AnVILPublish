@@ -66,13 +66,14 @@ There are only a small number of functions in the package; it is
 likely best practice to invoke these using `AnVILPublish::...()`
 rather than attaching the package to the search path.
 
-## The `gcloud` SDK
+## The `gcloud` SDK and `GCPtools`
 
 It is necessary to have the [gcloud SDK][1] available to copy notebook
-files to the workspace. Test availability with
+files to the workspace. Test availability with the `GCPtools` package:
 
-```{r, eval = FALSE}
-GCPtools::gcloud_exists()
+```{r checkGCP}
+library(GCPtools)
+gcloud_exists()
 ```
 
 and verify that the account and project are appropriate (consistent
