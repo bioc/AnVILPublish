@@ -4,7 +4,7 @@
 \alias{add_access}
 \title{Add Bioconductor_User group to workspace access}
 \usage{
-add_access(namespace, name)
+add_access(namespace, name, dry.run = FALSE)
 }
 \arguments{
 \item{namespace}{character(1) namespace (billing account) under
@@ -12,6 +12,10 @@ which the workspace belongs.}
 
 \item{name}{character(1) name of the workspace to add access
 credentials.}
+
+\item{dry.run}{\code{logical(1)} When \code{TRUE}, no changes are made to
+the workspace ACL. A message is printed describing what would
+have been done.}
 }
 \value{
 \code{add_access()} returns TRUE, invisibly.
@@ -23,7 +27,5 @@ permissions. Users gain access to the workspace (and others) by
 being added to the Bioconductor_User group.
 }
 \examples{
-\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
-add_access("landmarkanvil2", "Bioconductor-Package-AnVILHCAR")
-\dontshow{\}) # examplesIf}
+add_access("landmarkanvil2", "Bioconductor-Package-AnVILHCAR", TRUE)
 }

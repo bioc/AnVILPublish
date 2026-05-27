@@ -186,6 +186,11 @@
 #'     the package `DESCRIPTION` version and provenance metadata for
 #'     rendering in the workspace 'DASHBOARD'.
 #'
+#' @param dry.run `logical(1)` When `TRUE`, all local processing
+#'     (dashboard rendering, notebook conversion) is performed but no
+#'     changes are pushed to the workspace. Overrides `create` and
+#'     `update`. Use this to preview results without modifying AnVIL.
+#'
 #' @return `as_workspace()` returns the URL of the updated workspace,
 #'     invisibly.
 #'
@@ -194,16 +199,16 @@
 #'
 #' @examplesIf interactive()
 #' as_workspace(
-#'     path = "/home/user/bioc/AnVILHCAR",
+#'     path = "../AnVILPublish",
 #'     namespace = "landmarkanvil2",
 #'     name = "Bioconductor-Package-AnVILHCAR",
-#'     create = TRUE
+#'     dry.run = TRUE
 #' )
 #' @export
 as_workspace <-
     function(path, namespace, name = NULL, create = FALSE, update = FALSE,
              use_readme = FALSE, type = c('ipynb', 'rmd', 'both'),
-             quarto = c('render', 'convert'))
+             quarto = c('render', 'convert'), dry.run = FALSE)
 {
     type <- match.arg(type)
     quarto <- match.arg(quarto)
@@ -214,7 +219,8 @@ as_workspace <-
         isScalarLogical(create),
         isScalarLogical(update),
         isScalarLogical(use_readme),
-        !use_readme || file.exists(file.path(path, "README.md"))
+        !use_readme || file.exists(file.path(path, "README.md")),
+        isScalarLogical(dry.run)
     )
     path <- normalizePath(path)
 
@@ -222,7 +228,9 @@ as_workspace <-
         name <- paste0("Bioconductor-", .name_from_path(path))
 
     ## create / update workspace
-    if (create) {
+    if (dry.run) {
+        message("dry.run = TRUE: workspace '", name, "' would be created or updated")
+    } else if (create) {
         create_workspace(namespace, name)
     } else if (!update) {
         message("use 'update = TRUE' to make changes to the workspace")
@@ -249,9 +257,10 @@ as_workspace <-
         dashboard <- paste(dashboard, rme, collapse="\n")
     }
 
-    !(create || update) || .set_dashboard(dashboard, namespace, name)
-
-    !(create || update) || .set_tables(path, namespace, name)
+    if (!dry.run) {
+        !(create || update) || .set_dashboard(dashboard, namespace, name)
+        !(create || update) || .set_tables(path, namespace, name)
+    }
 
     ## create setup notebook
     setup <- .package_dependencies(path)
@@ -267,7 +276,9 @@ as_workspace <-
     ## build vignettes and add to workspace
     rmd_paths <- c(.vignette_paths(path), rmd_setup_path)
     as_notebook(
-        rmd_paths, namespace, name, update = update || create, type, quarto
+        rmd_paths, namespace, name,
+        update = !dry.run && (update || create),
+        type, quarto, dry.run = dry.run
     )
 
     wkspc <-

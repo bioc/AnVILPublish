@@ -12,7 +12,8 @@ as_workspace(
   update = FALSE,
   use_readme = FALSE,
   type = c("ipynb", "rmd", "both"),
-  quarto = c("render", "convert")
+  quarto = c("render", "convert"),
+  dry.run = FALSE
 )
 }
 \arguments{
@@ -45,6 +46,11 @@ Quarto vignettes. \code{both} copies both notebooks and vignettes.}
 \item{quarto}{\code{character(1)} If the program Quarto is installed,
 this parameter indicates whether the .Rmd files will be
 rendered or converted.  See vignette for more details.}
+
+\item{dry.run}{\code{logical(1)} When \code{TRUE}, all local processing
+(dashboard rendering, notebook conversion) is performed but no
+changes are pushed to the workspace. Overrides \code{create} and
+\code{update}. Use this to preview results without modifying AnVIL.}
 }
 \value{
 \code{as_workspace()} returns the URL of the updated workspace,
@@ -62,10 +68,10 @@ details on how vignettes are processed to notebooks.
 \examples{
 \dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
 as_workspace(
-    path = "/home/user/bioc/AnVILHCAR",
+    path = "../AnVILPublish",
     namespace = "landmarkanvil2",
     name = "Bioconductor-Package-AnVILHCAR",
-    create = TRUE
+    dry.run = TRUE
 )
 \dontshow{\}) # examplesIf}
 }

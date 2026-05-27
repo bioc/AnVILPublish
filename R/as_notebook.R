@@ -177,23 +177,31 @@
 #'     this parameter indicates whether the .Rmd files will be
 #'     rendered or converted.  See vignette for more details.
 #'
+#' @param dry.run `logical(1)` When `TRUE`, notebooks are created
+#'     locally but no files are copied to the workspace. Use this to
+#'     preview the conversion without modifying the workspace.
+#'
 #' @return `as_notebook()` returns the paths to the local (if `update
-#'     = FALSE`) or the workspace notebooks.
+#'     = FALSE` or `dry.run = TRUE`) or the workspace notebooks.
 #'
 #' @importFrom BiocBaseUtils isCharacter isScalarCharacter
 #'
-#' @examplesIf interactive()
+#' @examples
+#' exampleRmd <-
+#'     system.file("extdata", "example.Rmd", package = "AnVILPublish")
 #' as_notebook(
-#'     "vignettes/bioc2024.Rmd",
+#'     exampleRmd,
 #'     "landmarkanvil2",
-#'     "Bioconductor-Package-AnVILHCAR"
+#'     "Bioconductor-Package-AnVILHCAR",
+#'     dry.run = TRUE
 #' )
 #' @export
 as_notebook <-
     function(
         rmd_paths, namespace, name, update = FALSE,
         type = c('ipynb', 'rmd', 'both'),
-        quarto = c('render', 'convert'))
+        quarto = c('render', 'convert'),
+        dry.run = FALSE)
 {
     type <- match.arg(type)
     quarto <- match.arg(quarto)
@@ -201,7 +209,8 @@ as_notebook <-
         isCharacter(rmd_paths), all(file.exists(rmd_paths)),
         isScalarCharacter(namespace),
         isScalarCharacter(name),
-        isScalarLogical(update)
+        isScalarLogical(update),
+        isScalarLogical(dry.run)
     )
 
     notebooks <- character(0)
@@ -217,7 +226,14 @@ as_notebook <-
         notebooks <- c(notebooks, rmd_paths)
     }
 
-    if (update) {
+    if (dry.run) {
+        message(
+            "dry.run = TRUE: ",
+            length(notebooks), " notebook(s) created locally; ",
+            "not copied to workspace '", name, "'"
+        )
+        notebooks
+    } else if (update) {
         .cp_to_cloud_notebooks(notebooks, namespace, name)
     } else {
         message("use 'update = TRUE' to copy notebooks to the workspace")

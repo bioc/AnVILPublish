@@ -10,7 +10,8 @@ as_notebook(
   name,
   update = FALSE,
   type = c("ipynb", "rmd", "both"),
-  quarto = c("render", "convert")
+  quarto = c("render", "convert"),
+  dry.run = FALSE
 )
 }
 \arguments{
@@ -33,9 +34,13 @@ Quarto vignettes. \code{both} copies both notebooks and vignettes.}
 \item{quarto}{\code{character(1)} If the program Quarto is installed,
 this parameter indicates whether the .Rmd files will be
 rendered or converted.  See vignette for more details.}
+
+\item{dry.run}{\code{logical(1)} When \code{TRUE}, notebooks are created
+locally but no files are copied to the workspace. Use this to
+preview the conversion without modifying the workspace.}
 }
 \value{
-\code{as_notebook()} returns the paths to the local (if \code{update = FALSE}) or the workspace notebooks.
+\code{as_notebook()} returns the paths to the local (if \code{update = FALSE} or \code{dry.run = TRUE}) or the workspace notebooks.
 }
 \description{
 \code{as_notebook()} renders Rmarkdown (\code{.Rmd}) or Quarto
@@ -49,11 +54,12 @@ details on the conversion process; best results are obtained
 when Quarto software is available.
 }
 \examples{
-\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
+exampleRmd <-
+    system.file("extdata", "example.Rmd", package = "AnVILPublish")
 as_notebook(
-    "vignettes/bioc2024.Rmd",
+    exampleRmd,
     "landmarkanvil2",
-    "Bioconductor-Package-AnVILHCAR"
+    "Bioconductor-Package-AnVILHCAR",
+    dry.run = TRUE
 )
-\dontshow{\}) # examplesIf}
 }
