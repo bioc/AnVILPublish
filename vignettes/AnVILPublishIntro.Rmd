@@ -277,7 +277,6 @@ outlined here.
             given = "Martin",
             family = "Morgan",
             role = c("aut", "cre"),
-            email = "Martin.Morgan@RoswellPark.org",
             comment = c(ORCID = "0000-0002-5874-8148")
         ),
         person("Nitesh", "Turaga", role = "ctb"),
