@@ -95,7 +95,7 @@ Jupyter (`.ipynb`) notebooks uses [Quarto][2] software. It must be
 available from within _R_, e.g.,
 
 ```{r checkQuarto}
-system2("quarto", "--version")
+system2("quarto", "--version", stdout = TRUE, stderr = TRUE)
 ```
 
 The user must determine if they want their vignettes converted or
