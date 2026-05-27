@@ -132,7 +132,7 @@
             system2("quarto", c("convert", rmd_path))
         }
     }
-    sub("\\.Rmd", ".ipynb", rmd_paths)
+    sub("\\.[Rr]md$", ".ipynb", rmd_paths)
 }
 
 .quarto_exists <-
