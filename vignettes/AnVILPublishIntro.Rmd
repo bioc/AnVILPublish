@@ -103,8 +103,6 @@ rendered into Jupyter notebooks. The difference is that `render`
 automatically executes _R_ code blocks and embeds images, while
 `convert` will not.
 
-Use of Python _notedown_ for conversion is no longer supported.
-
 [Quarto]: https://quarto.org
 
 # Creating or updating workspaces
@@ -339,9 +337,6 @@ outlined here.
 Current best practice is to use [quarto][Quarto] for conversion of
 .Rmd to ipynb. Quarto is available on the Bioconductor docker image,
 or easily installed on Linux, macOS, or Windows.
-
-Support for conversion using the Python _notedown_ module is no longer
-supported.
 
 # Session info {.unnumbered}
 

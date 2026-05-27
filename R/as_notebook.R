@@ -27,14 +27,6 @@
     }
 }
 
-#' @importFrom rmarkdown render md_document
-.rmd_to_md <-
-    function(rmd_paths)
-{
-    knitr::opts_chunk$set(eval = FALSE)
-    vapply(rmd_paths, render, character(1), md_document(), envir = globalenv())
-}
-
 ## Extract vignette title from Rmd
 #' @importFrom rmarkdown yaml_front_matter
 .notebook_title_from_yaml <-
@@ -81,35 +73,6 @@
 
         title
     }, character(1))
-}
-
-#' @importFrom utils tail
-.md_to_ipynb <-
-    function(md_paths)
-{
-    stop(
-        "conversion using 'notedown' is no longer supported; ",
-        "ensure `Sys.which('quarto')` finds an installation of 'quarto' ",
-        "software from Posit"
-    )
-    ipynb_paths <- sub("\\.md", ".ipynb", md_paths)
-    for (i in seq_along(md_paths)) {
-        system2("notedown", c(md_paths[[i]], "-o", ipynb_paths[[i]]))
-        ## FIXME: more robust way to add / update top-level metadata
-        txt <- readLines(ipynb_paths[[i]])
-        idx <- tail(grep(' "metadata": {},', txt, fixed = TRUE), 1)
-        txt[idx] <- paste0(
-            ' "metadata": {',
-            '  "kernelspec": {',
-            '   "display_name": "R",',
-            '   "language": "R",',
-            '   "name": "ir"',
-            '  }',
-            '},'
-        )
-        writeLines(txt, ipynb_paths[[i]])
-    }
-    ipynb_paths
 }
 
 #' @importFrom AnVILGCP avstorage avcopy
@@ -218,8 +181,11 @@ as_notebook <-
         if (.quarto_exists()) {
             notebooks <- .rmd_to_quarto(rmd_paths, quarto)
         } else {
-            mds <- .rmd_to_md(rmd_paths)
-            notebooks <- .md_to_ipynb(mds)
+            stop(
+                "The system installation of the 'quarto' CLI via",
+                " `Sys.which('quarto')` was not found;",
+                " install Quarto from https://quarto.org/docs/get-started/"
+            )
         }
     }
     if (type %in% c('rmd', 'both')) {
