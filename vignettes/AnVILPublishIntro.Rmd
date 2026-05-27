@@ -42,9 +42,17 @@ notebooks ready for evaluation in AnVIL.
 
 If necessary, install the AnVILPublish library
 
-```{r, eval = FALSE}
-if (!"AnVILPublish" %in% rownames(installed.packages()))
-    BiocManager::install("AnVILPublish")
+```{r install, eval = FALSE}
+if (!require("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+
+BiocManager::install("AnVILPublish")
+```
+
+## Package load
+
+```{r load,include=TRUE,results="hide",message=FALSE,warning=FALSE}
+library(AnVILPublish)
 ```
 
 # Requirements 
