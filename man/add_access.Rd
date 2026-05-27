@@ -18,13 +18,13 @@ the workspace ACL. A message is printed describing what would
 have been done.}
 }
 \value{
-\code{add_access()} returns TRUE, invisibly.
+\code{add_access()} returns \code{TRUE}, invisibly.
 }
 \description{
-\code{add_access()} adds the
-\code{Bioconductor_User} group to a workspace with \code{READER}
-permissions. Users gain access to the workspace (and others) by
-being added to the Bioconductor_User group.
+\code{add_access()} adds the \code{Bioconductor_User} group to a
+workspace with \code{READER} permissions. Users gain access to
+the workspace (and others) by being added to the
+\code{Bioconductor_User} group.
 }
 \examples{
 add_access("landmarkanvil2", "Bioconductor-Package-AnVILHCAR", TRUE)

@@ -57,11 +57,11 @@ changes are pushed to the workspace. Overrides \code{create} and
 invisibly.
 }
 \description{
-\code{as_workspace()} renders a package source tree (e.g.,
-from a git checkout) as an AnVIL workspace.
+\code{as_workspace()} renders a package source tree (e.g., from a
+git checkout) as an AnVIL workspace.
 }
 \details{
-Information from the DESCRIPTION file and Rmd YAML are
+Information from the \code{DESCRIPTION} file and Rmd YAML are
 used to populate the 'DASHBOARD' tab.  See \code{?as_notebook()} for
 details on how vignettes are processed to notebooks.
 }

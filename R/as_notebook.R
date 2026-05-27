@@ -143,13 +143,11 @@
     )
 }
 
-#' @rdname as_notebook
+#' Render vignettes as .ipynb notebooks
 #'
-#' @title Render vignettes as .ipynb notebooks
-#'
-#' @description `as_notebook()` renders Rmarkdown (`.Rmd`) or Quarto
-#'     (`.Qmd`) vignettes as Juptyer (`.ipynb`) notebooks. The
-#'     vignettes and notebooks are updated in an AnVIL workspace.
+#' `as_notebook()` renders Rmarkdown (`.Rmd`) or Quarto
+#'   (`.Qmd`) vignettes as Juptyer (`.ipynb`) notebooks. The
+#'   vignettes and notebooks are updated in an AnVIL workspace.
 #'
 #' @details See the vignette
 #'     "Publishing R / Bioconductor Packages To AnVIL Workspaces" for

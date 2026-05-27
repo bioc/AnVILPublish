@@ -157,14 +157,12 @@
     all(result)
 }
 
-#' @rdname as_workspace
+#' Render R packages as AnVIL workspaces
 #'
-#' @title Render R packages as AnVIL workspaces
+#' `as_workspace()` renders a package source tree (e.g., from a
+#'   git checkout) as an AnVIL workspace.
 #'
-#' @description `as_workspace()` renders a package source tree (e.g.,
-#'     from a git checkout) as an AnVIL workspace.
-#'
-#' @details Information from the DESCRIPTION file and Rmd YAML are
+#' @details Information from the `DESCRIPTION` file and Rmd YAML are
 #'     used to populate the 'DASHBOARD' tab.  See `?as_notebook()` for
 #'     details on how vignettes are processed to notebooks.
 #'

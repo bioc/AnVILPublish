@@ -18,14 +18,12 @@
         .stop(response, namespace, name, "update workspace permissions failed")
 }
 
-#' @rdname add_access
+#' Add Bioconductor_User group to workspace access
 #'
-#' @title Add Bioconductor_User group to workspace access
-#'
-#' @description `add_access()` adds the
-#'     `Bioconductor_User` group to a workspace with `READER`
-#'     permissions. Users gain access to the workspace (and others) by
-#'     being added to the Bioconductor_User group.
+#' `add_access()` adds the `Bioconductor_User` group to a
+#'    workspace with `READER` permissions. Users gain access to
+#'    the workspace (and others) by being added to the
+#'    `Bioconductor_User` group.
 #'
 #' @param namespace character(1) namespace (billing account) under
 #'     which the workspace belongs.
@@ -37,7 +35,7 @@
 #'     the workspace ACL. A message is printed describing what would
 #'     have been done.
 #'
-#' @return `add_access()` returns TRUE, invisibly.
+#' @return `add_access()` returns `TRUE`, invisibly.
 #'
 #' @importFrom BiocBaseUtils isScalarCharacter isScalarLogical
 #'
