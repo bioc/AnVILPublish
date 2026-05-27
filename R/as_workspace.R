@@ -157,6 +157,73 @@
     all(result)
 }
 
+.workspace_action <-
+    function(create, update, dry.run, namespace, name)
+{
+    if (dry.run) {
+        message(
+            "dry.run = TRUE: workspace '", name, "' would be created or updated"
+        )
+    } else if (create) {
+        create_workspace(namespace, name)
+    } else if (!update) {
+        message("use 'update = TRUE' to make changes to the workspace")
+    }
+    invisible(NULL)
+}
+
+.render_dashboard <-
+    function(path, namespace, name, type, use_readme)
+{
+    description <- .package_description(path)
+    vignette_description <- .rmd_vignette_description(path, type)
+    processing <- list(
+        ProcessDate = Sys.time(),
+        RVersion = paste0(R.version$major, ".", R.version$minor),
+        BioconductorVersion = BiocManager::version()
+    )
+    data <- c(description, vignette_description, processing)
+    data$namespace <- namespace
+    data$name <- name
+
+    tmpl <- .template("dashboard.tmpl")
+    dashboard <- whisker.render(tmpl, data)
+
+    if (use_readme) {
+        rmepath <- file.path(path, "README.md")
+        rme <- paste(readLines(rmepath), collapse = "\n")
+        dashboard <- paste(dashboard, rme, collapse = "\n")
+    }
+
+    list(dashboard = dashboard, data = data)
+}
+
+.push_workspace_content <-
+    function(dashboard, path, namespace, name, create, update)
+{
+    if (create || update) {
+        .set_dashboard(dashboard, namespace, name)
+        .set_tables(path, namespace, name)
+    }
+    invisible(NULL)
+}
+
+.render_setup_notebook <-
+    function(data, path, name)
+{
+    setup <- .package_dependencies(path)
+    data <- c(data, setup)
+    tmpl <- .template("setup-notebook.tmpl")
+    setup_notebook <- whisker.render(tmpl, data)
+
+    tmpdir <- tempfile()
+    dir.create(tmpdir)
+    rmd_setup_file <- paste0("00-", name, ".Rmd")
+    rmd_setup_path <- file.path(tmpdir, rmd_setup_file)
+    writeLines(setup_notebook, rmd_setup_path)
+    rmd_setup_path
+}
+
 #' Render R packages as AnVIL workspaces
 #'
 #' `as_workspace()` renders a package source tree (e.g., from a
@@ -204,9 +271,11 @@
 #' )
 #' @export
 as_workspace <-
-    function(path, namespace, name = NULL, create = FALSE, update = FALSE,
-             use_readme = FALSE, type = c('ipynb', 'rmd', 'both'),
-             quarto = c('render', 'convert'), dry.run = FALSE)
+    function(
+        path, namespace, name = NULL, create = FALSE, update = FALSE,
+        use_readme = FALSE, type = c('ipynb', 'rmd', 'both'),
+        quarto = c('render', 'convert'), dry.run = FALSE
+    )
 {
     type <- match.arg(type)
     quarto <- match.arg(quarto)
@@ -221,57 +290,21 @@ as_workspace <-
         isScalarLogical(dry.run)
     )
     path <- normalizePath(path)
-
     if (is.null(name))
         name <- paste0("Bioconductor-", .name_from_path(path))
 
-    ## create / update workspace
-    if (dry.run) {
-        message("dry.run = TRUE: workspace '", name, "' would be created or updated")
-    } else if (create) {
-        create_workspace(namespace, name)
-    } else if (!update) {
-        message("use 'update = TRUE' to make changes to the workspace")
-    }
+    .workspace_action(create, update, dry.run, namespace, name)
 
-    ## populate dashboard from package and vignette metadata
-    description <- .package_description(path)
-    vignette_description <- .rmd_vignette_description(path, type)
-    processing <- list(
-        ProcessDate = Sys.time(),
-        RVersion = paste0(R.version$major, ".", R.version$minor),
-        BioconductorVersion = BiocManager::version()
-    )
-    data <- c(description, vignette_description, processing)
-    data$namespace <- namespace
-    data$name <- name
+    rendered <- .render_dashboard(path, namespace, name, type, use_readme)
+    dashboard <- rendered$dashboard
+    data <- rendered$data
 
-    tmpl <- .template("dashboard.tmpl")
-    dashboard <- whisker.render(tmpl, data)
+    if (!dry.run)
+        .push_workspace_content(
+            dashboard, path, namespace, name, create, update
+        )
 
-    if (use_readme) {
-        rmepath <- file.path(path, "README.md")
-        rme <- paste(readLines(rmepath), collapse="\n")
-        dashboard <- paste(dashboard, rme, collapse="\n")
-    }
-
-    if (!dry.run) {
-        !(create || update) || .set_dashboard(dashboard, namespace, name)
-        !(create || update) || .set_tables(path, namespace, name)
-    }
-
-    ## create setup notebook
-    setup <- .package_dependencies(path)
-    data <- c(data, setup)
-    tmpl <- .template("setup-notebook.tmpl")
-    setup_notebook <- whisker.render(tmpl, data)
-    tmpdir <- tempfile()
-    dir.create(tmpdir)
-    rmd_setup_file <- paste0("00-", name, ".Rmd")
-    rmd_setup_path <- file.path(tmpdir, rmd_setup_file)
-    writeLines(setup_notebook, rmd_setup_path)
-
-    ## build vignettes and add to workspace
+    rmd_setup_path <- .render_setup_notebook(data, path, name)
     rmd_paths <- c(.vignette_paths(path), rmd_setup_path)
     as_notebook(
         rmd_paths, namespace, name,
