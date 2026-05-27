@@ -94,7 +94,7 @@ Conversion of Rmarkdown (`.Rmd`) or Quarto (`.Qmd`) vignettes to
 Jupyter (`.ipynb`) notebooks uses [Quarto][] software. It must be
 available from within _R_, e.g.,
 
-```{r, eval = FALSE}
+```{r checkQuarto}
 system2("quarto", "--version")
 ```
 
