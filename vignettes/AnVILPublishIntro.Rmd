@@ -91,7 +91,7 @@ Note that these be used to set, as well as interrogate, the account and project.
 ## `Quarto` software
 
 Conversion of Rmarkdown (`.Rmd`) or Quarto (`.Qmd`) vignettes to
-Jupyter (`.ipynb`) notebooks uses [Quarto][] software. It must be
+Jupyter (`.ipynb`) notebooks uses [Quarto][2] software. It must be
 available from within _R_, e.g.,
 
 ```{r checkQuarto}
@@ -103,7 +103,7 @@ rendered into Jupyter notebooks. The difference is that `render`
 automatically executes _R_ code blocks and embeds images, while
 `convert` will not.
 
-[Quarto]: https://quarto.org
+[2]: https://quarto.org
 
 # Creating or updating workspaces
 
@@ -155,11 +155,11 @@ to a wider audience.
 
 ## From collections of Rmd files
 
-Some _R_ resources, e.g., [bookdown][] sites, are not in
+Some _R_ resources, e.g., [bookdown][3] sites, are not in
 packages. These can be processed to workspaces with minor
 modifications.
 
-[bookdown]: https://bookdown.org/
+[3]: https://bookdown.org/
 
 1. Add a standard DESCRIPTION file (e.g.,
    `use_this::use_description()`) to the directory containing the
@@ -334,9 +334,12 @@ outlined here.
 
 ## Additional notes on .Rmd conversion
 
-Current best practice is to use [quarto][Quarto] for conversion of
+Current best practice is to use [quarto][2] for conversion of
 .Rmd to ipynb. Quarto is available on the Bioconductor docker image,
-or easily installed on Linux, macOS, or Windows.
+or easily installed on Linux, macOS, or Windows. See the
+[Quarto Get Started guide][4] for installation instructions.
+
+[4]: https://quarto.org/docs/get-started/
 
 # Session info {.unnumbered}
 
