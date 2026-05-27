@@ -147,7 +147,7 @@ to create or update an arbitrary workspace. The option `use_readme = TRUE`
 appends a `README.md` file to the formatted content of the `DESCRIPTION`
 file.
 
-`AnVILPublish::as_workspace()` invokes `as_notebook()` so this step
+`as_workspace()` invokes `as_notebook()` so this step
 does not need to be performed 'by hand'.
 
 See the command `add_access()`, below, to make the workspace available
@@ -184,7 +184,7 @@ modifications.
    ---
    ```
 
-Publish the resources with `AnVILPublish::as_workspace()`:
+Publish the resources with `as_workspace()`:
 
 ```{r as_workspace, eval = FALSE}
 as_workspace(
