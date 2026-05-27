@@ -125,14 +125,14 @@
 .rmd_to_quarto <-
     function(rmd_paths, quarto)
 {
-    for(rmd_path in rmd_paths) {
+    for (rmd_path in rmd_paths) {
         if (identical(quarto, "render")) {
             system2("quarto", c("render", rmd_path, "--to", "ipynb"))
         } else {
             system2("quarto", c("convert", rmd_path))
         }
     }
-    notebooks <- sub("\\.Rmd", ".ipynb", rmd_paths)
+    sub("\\.Rmd", ".ipynb", rmd_paths)
 }
 
 .quarto_exists <-
