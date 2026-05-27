@@ -24,7 +24,7 @@
     descr <- packageDescription(package, directory)
 
     if (is.null(descr[["Author"]])) {
-        parsed = tools:::.expand_package_description_db_R_fields(unlist(descr))
+        parsed <- tools:::.expand_package_description_db_R_fields(unlist(descr))
         descr[["Author"]] <- parsed[["Author"]]
         descr[["Maintainer"]] <- parsed[["Maintainer"]]
     }
