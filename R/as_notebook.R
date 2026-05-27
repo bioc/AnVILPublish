@@ -146,13 +146,13 @@
 #' Render vignettes as .ipynb notebooks
 #'
 #' `as_notebook()` renders Rmarkdown (`.Rmd`) or Quarto
-#'   (`.Qmd`) vignettes as Juptyer (`.ipynb`) notebooks. The
+#'   (`.qmd`) vignettes as Juptyer (`.ipynb`) notebooks. The
 #'   vignettes and notebooks are updated in an AnVIL workspace.
 #'
 #' @details See the vignette
 #'     "Publishing R / Bioconductor Packages To AnVIL Workspaces" for
 #'     details on the conversion process; best results are obtained
-#'     when Quarto software is available.
+#'     when the `quarto` command line interface (CLI) is available.
 #'
 #' @param rmd_paths `character()` paths to Rmd or Qmd files.
 #'
@@ -171,16 +171,18 @@
 #'     copies only the Jupyter notebook. `rmd` copies Rmarkdown and
 #'     Quarto vignettes. `both` copies both notebooks and vignettes.
 #'
-#' @param quarto `character(1)` If the program Quarto is installed,
-#'     this parameter indicates whether the .Rmd files will be
-#'     rendered or converted.  See vignette for more details.
+#' @param quarto `character(1)` Method to convert vignettes to
+#'     `.ipynb`. Either `"render"` (runs `quarto render --to ipynb`)
+#'     or `"convert"` (runs `quarto convert`). Note that the `quarto`
+#'     CLI must be installed.
 #'
 #' @param dry.run `logical(1)` When `TRUE`, notebooks are created
 #'     locally but no files are copied to the workspace. Use this to
 #'     preview the conversion without modifying the workspace.
 #'
-#' @return `as_notebook()` returns the paths to the local (if `update
-#'     = FALSE` or `dry.run = TRUE`) or the workspace notebooks.
+#' @return `as_notebook()` returns the paths to the local
+#'     (if `update = FALSE` or `dry.run = TRUE`) or the
+#'     workspace notebooks.
 #'
 #' @importFrom BiocBaseUtils isCharacter isScalarCharacter
 #'

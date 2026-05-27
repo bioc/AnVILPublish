@@ -43,9 +43,10 @@ workspace. Must be on of \code{ipynb}, \code{rmd}, or \code{both}. \code{ipynb}
 copies only the Jupyter notebook. \code{rmd} copies Rmarkdown and
 Quarto vignettes. \code{both} copies both notebooks and vignettes.}
 
-\item{quarto}{\code{character(1)} If the program Quarto is installed,
-this parameter indicates whether the .Rmd files will be
-rendered or converted.  See vignette for more details.}
+\item{quarto}{\code{character(1)} Method to convert vignettes to
+\code{.ipynb}. Either \code{"render"} (runs \verb{quarto render --to ipynb})
+or \code{"convert"} (runs \verb{quarto convert}). Note that the \code{quarto}
+CLI must be installed.}
 
 \item{dry.run}{\code{logical(1)} When \code{TRUE}, all local processing
 (dashboard rendering, notebook conversion) is performed but no

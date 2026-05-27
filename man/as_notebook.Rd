@@ -31,27 +31,30 @@ workspace. Must be on of \code{ipynb}, \code{rmd}, or \code{both}. \code{ipynb}
 copies only the Jupyter notebook. \code{rmd} copies Rmarkdown and
 Quarto vignettes. \code{both} copies both notebooks and vignettes.}
 
-\item{quarto}{\code{character(1)} If the program Quarto is installed,
-this parameter indicates whether the .Rmd files will be
-rendered or converted.  See vignette for more details.}
+\item{quarto}{\code{character(1)} Method to convert vignettes to
+\code{.ipynb}. Either \code{"render"} (runs \verb{quarto render --to ipynb})
+or \code{"convert"} (runs \verb{quarto convert}). Note that the \code{quarto}
+CLI must be installed.}
 
 \item{dry.run}{\code{logical(1)} When \code{TRUE}, notebooks are created
 locally but no files are copied to the workspace. Use this to
 preview the conversion without modifying the workspace.}
 }
 \value{
-\code{as_notebook()} returns the paths to the local (if \code{update = FALSE} or \code{dry.run = TRUE}) or the workspace notebooks.
+\code{as_notebook()} returns the paths to the local
+(if \code{update = FALSE} or \code{dry.run = TRUE}) or the
+workspace notebooks.
 }
 \description{
 \code{as_notebook()} renders Rmarkdown (\code{.Rmd}) or Quarto
-(\code{.Qmd}) vignettes as Juptyer (\code{.ipynb}) notebooks. The
+(\code{.qmd}) vignettes as Juptyer (\code{.ipynb}) notebooks. The
 vignettes and notebooks are updated in an AnVIL workspace.
 }
 \details{
 See the vignette
 "Publishing R / Bioconductor Packages To AnVIL Workspaces" for
 details on the conversion process; best results are obtained
-when Quarto software is available.
+when the \code{quarto} command line interface (CLI) is available.
 }
 \examples{
 exampleRmd <-
