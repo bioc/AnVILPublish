@@ -1,3 +1,29 @@
+# AnVILPublish 1.24.0
+
+## New Features
+
+- (v. 1.23.1) Add `dry.run` argument to `add_access()`, `as_notebook()`,
+  and `as_workspace()` to allow local processing and previewing
+  without making remote changes in AnVIL.
+
+- (v. 1.23.3) Add `AnVILBase` to `Suggests`.
+
+## Significant User-Visible Changes
+
+- (v. 1.23.1) Remove legacy support for python `notedown` conversion.
+  A system installation of Quarto is now required to convert `.Rmd` to
+  `.ipynb` notebooks, and a clear error is thrown if it is not found.
+
+- (v. 1.23.1) Add `quarto-cli` to `SystemRequirements` in DESCRIPTION.
+
+- (v. 1.23.1) Add `URL` and `BugReports` fields to DESCRIPTION.
+
+- (v. 1.23.1) Add funding (`fnd`) role and grant number to package authors.
+
+## Bug Fixes
+
+- (v. 1.23.1) Handle lowercase `.rmd` extensions in `as_notebook()`.
+
 # AnVILPublish 1.22.0
 
 ## New Features
