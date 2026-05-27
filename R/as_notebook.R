@@ -46,7 +46,8 @@
     lines <- readLines(rmd)
     rmd_headings <- lines[grepl("^#[[:blank:]]+", lines)]
 
-    ## ignore headings starting with '(PART)' (FIXME: is this just a convention?)
+    ## ignore headings starting with '(PART)'
+    ## (FIXME: is this just a convention?)
     PART_lines <- grepl("^#[[:blank:]]+\\(PART\\)+", rmd_headings)
     title <- head(rmd_headings[!PART_lines], 1L)
 

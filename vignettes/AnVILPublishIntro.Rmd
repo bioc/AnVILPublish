@@ -124,8 +124,8 @@ file may contain 'whisker' expressions for variable substitution, as
 follows:
 
 - `{{ bucket }}`: the bucket location of the (possibly newly created)
-  workspace, as returned by `avstorage()`.
-  
+    workspace, as returned by `avstorage()`.
+
 Tables are processed first with `whisker.render()` for variable
 substitution, and then `readr::read_csv()` and `avtable_import()`.
 
@@ -162,27 +162,27 @@ modifications.
 [3]: https://bookdown.org/
 
 1. Add a standard DESCRIPTION file (e.g.,
-   `use_this::use_description()`) to the directory containing the
-   `.Rmd` files.
+    `use_this::use_description()`) to the directory containing the
+    `.Rmd` files.
 
 1. Use the `Package:` field to provide a one-word identifier (e.g.,
-   `Package: Bioc2020CNV`) for your material. Add a key-value pair
-   `Type: Workshop` or similar. The `Pacakge:` and `Type:` fields will
-   be used to create the workspace name as, in the example here,
-   `Bioconductor-Workshop-Bioc2020CNV`.
+    `Package: Bioc2020CNV`) for your material. Add a key-value pair
+    `Type: Workshop` or similar. The `Pacakge:` and `Type:` fields will
+    be used to create the workspace name as, in the example here,
+    `Bioconductor-Workshop-Bioc2020CNV`.
 
 1. Add a 'yaml' chunk to the top of each `.Rmd` file, if not already
-   present, including the title and (optionally) name information,
-   e.g.,
+    present, including the title and (optionally) name information,
+    e.g., 
 
-   ```
-   ---
-   title: "01. Introduction to the workshop"
-   author:
-   - name: Iman Author
-   - name: Imanother Author
-   ---
-   ```
+    ```
+    ---
+    title: "01. Introduction to the workshop"
+    author:
+    - name: Iman Author
+    - name: Imanother Author
+    ---
+    ```
 
 Publish the resources with `as_workspace()`:
 
@@ -258,13 +258,13 @@ outlined here.
 ## Best practices
 
 1. For packages, make sure the DESCRIPTION file is complete. Use the
-   `Authors@R` notation for fully specifying authors. Add a `Date:`
-   field indicating date of last modification. Follow other
-   Bioconductor best practices, e.g., using and incrementing
-   appropriate version numbers.
+    `Authors@R` notation for fully specifying authors. Add a `Date:`
+    field indicating date of last modification. Follow other
+    Bioconductor best practices, e.g., using and incrementing
+    appropriate version numbers.
 
 1. For collections of vignettes not in a package (e.g., a bookdown
-   folder), add a DESCRIPTION file at the top level. An example is
+    folder), add a DESCRIPTION file at the top level. An example is
 
     ```
     Package: BCC2020
@@ -305,32 +305,32 @@ outlined here.
     RoxygenNote: 7.1.1
     ```
     
-   The `Type` and `Package` fields are used to construct the second
-   and third elements of the workspace name (in this case,
-   `Bioconductor-Workshop-BCC2020`). `Title`, `Version`, `Authors@R`,
-   `Description`, `License`, and `Date` fields are used to construct
-   the DASHBOARD page.
+The `Type` and `Package` fields are used to construct the second
+and third elements of the workspace name (in this case,
+`Bioconductor-Workshop-BCC2020`). `Title`, `Version`, `Authors@R`,
+`Description`, `License`, and `Date` fields are used to construct
+the DASHBOARD page.
 
 1. Start each vignette with 'yaml' containing essential metadata about
-   the document -- title and author(s). Include other information if
-   desired, e.g., abstract, (static) date of last modification.
+    the document -- title and author(s). Include other information if
+    desired, e.g., abstract, (static) date of last modification.
 
 1. Use a file naming system AND a yaml `title` field that sorts files
-   into the order in which the document content is to be presented,
-   e.g., using file names `01-Setup.Rmd`, `02-...` and titles (in the
-   yaml) `title: "01 Setup"`, ... Naming both files and titles in this
-   way provides some chance that the Rmd files are presented, or can
-   be made to be presented, sensibly across the Bioconductor package
-   landing page and Workspace / NOTEBOOK interface.
+    into the order in which the document content is to be presented,
+    e.g., using file names `01-Setup.Rmd`, `02-...` and titles (in the
+    yaml) `title: "01 Setup"`, ... Naming both files and titles in this
+    way provides some chance that the Rmd files are presented, or can
+    be made to be presented, sensibly across the Bioconductor package
+    landing page and Workspace / NOTEBOOK interface.
 
 1. All code chunks, regardless of annotations such as `eval = FALSE`
-   or `echo = FALSE` are converted to visible, evaluated cells in
-   jupyter notebooks. Replace code chunks that you do not wish the
-   user to evaluate with HTML tags `<pre></pre>`.
+    or `echo = FALSE` are converted to visible, evaluated cells in
+    jupyter notebooks. Replace code chunks that you do not wish the
+    user to evaluate with HTML tags `<pre></pre>`.
 
 1. Although both Rmarkdown and python notebooks support code chunks in
-   multiple languages, there is no support for this in the conversion
-   process -- all cells are presented as _R_ code.
+    multiple languages, there is no support for this in the conversion
+    process -- all cells are presented as _R_ code.
 
 ## Additional notes on .Rmd conversion
 
