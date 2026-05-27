@@ -18,6 +18,17 @@ vignette: |
   %\VignetteEncoding{UTF-8}
 ---
 
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+    collapse = TRUE,
+    comment = "#>"
+)
+isAnVILWS <- function() {
+    GCPtools::gcloud_exists() &&
+    identical(AnVILBase::avplatform_namespace(), "AnVILGCP")
+}
+```
+
 # AnVILPublish
 
 This package produces AnVIL workspaces from R packages. Use this package to
@@ -59,9 +70,9 @@ GCPtools::gcloud_exists()
 and verify that the account and project are appropriate (consistent
 with AnVIL credentials) for use with AnVIL
 
-```{r, eval = FALSE}
-GCPtools::gcloud_account()
-GCPtools::gcloud_project()
+```{r gcloudsettings, eval = isAnVILWS()}
+gcloud_account()
+gcloud_project()
 ```
 
 Note that these be used to set, as well as interrogate, the account and project.
