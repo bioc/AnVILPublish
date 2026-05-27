@@ -186,13 +186,14 @@ modifications.
    ---
    ```
 
-Publish the resources with
+Publish the resources with `AnVILPublish::as_workspace()`:
 
-```{r, eval = FALSE}
-AnVILPublish::as_workspace(
-    "path/to/directory",      # directory containing DESCRIPTION file
-    "bioconductor-rpci-anvil",
-    create = TRUE
+```{r as_workspace, eval = FALSE}
+as_workspace(
+    "path/to/directory",          # directory containing DESCRIPTION file
+    "bioconductor-rpci-anvil",    # i.e., billing account
+    create = TRUE,                # use update = TRUE for an existing workspace
+    dry.run = TRUE                # set to FALSE to apply changes
 )
 ```
 
@@ -208,12 +209,19 @@ Transforming vignettes to notebooks may require several iterations,
 and is available as a separate operation. Use `update = FALSE` to
 create local copies for preview.
 
-```{r, eval = FALSE}
-AnVILPublish::as_notebook(
-    "paths/to/files.Rmd",
+```{r as_notebook}
+exampleRmd <- system.file(
+    "extdata", "example.Rmd",
+    package = "AnVILPublish",
+    mustWork = TRUE
+)
+
+as_notebook(
+    rmd_paths = exampleRmd,
     "bioconductor-rpci-anvil",     # i.e., billing account
     "Bioconductor-Package-Foo",    # Workspace name
-    update = FALSE                 # make notebooks, but do not update workspace
+    update = FALSE,                # make notebooks, but do not update workspace
+    dry.run = TRUE                 # set to FALSE to apply changes
 )
 ```
 
@@ -233,10 +241,11 @@ see the workspace. AnVIL users wishing to view the workspace should
 be added to the `Bioconductor_User` group, rather than to the
 workspace directly. To add the user group, use
 
-```{r, eval = FALSE}
-AnVILPublish::add_access(
+```{r add_access}
+add_access(
     "bioconductor-rpci-anvil",
-    "Bioconductor-Package-Foo"
+    "Bioconductor-Package-Foo",
+    dry.run = TRUE                 # set to FALSE to apply changes
 )
 ```
 
