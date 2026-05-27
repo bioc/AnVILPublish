@@ -139,14 +139,6 @@ is a good candidate for future inclusion.
 The one-stop route is to create a workspace from the local package source
 (e.g., GitHub checkout) directory using `as_workspace()`.
 
-```{r, eval = FALSE}
-AnVILPublish::as_workspace(
-    "path/to/package",
-    "bioconductor-rpci-anvil",     # i.e., billing account
-    create = TRUE                  # use update = TRUE for an existing workspace
-)
-```
-
 Use `create = TRUE` to create a new workspace. Use `update = TRUE` to
 update (and potentially overwrite) an existing workspace. One of
 `create` and `update` must be TRUE. The command illustrated above does
