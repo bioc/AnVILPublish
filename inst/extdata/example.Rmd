@@ -1,0 +1,147 @@
+---
+title: "Basic R Commands"
+author: "AnVILPublish"
+date: "`r BiocStyle::doc_date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+    collapse = TRUE,
+    comment = "#>"
+)
+```
+
+# Introduction
+
+This document demonstrates basic R commands and is intended as an example
+input for the `as_notebook()` function in the **AnVILPublish** package. It
+can be converted to a Jupyter notebook and used interactively in an AnVIL
+workspace.
+
+# Arithmetic and Assignment
+
+R can be used as a calculator. Results are assigned to variables with `<-`.
+
+```{r arithmetic}
+x <- 5 + 3
+y <- 10 / 2
+z <- x * y
+z
+```
+
+# Vectors
+
+Vectors are the basic data structure in R, created with `c()`.
+
+```{r vectors}
+nums <- c(1, 4, 9, 16, 25)
+nums
+
+# Vectorized operations
+sqrt(nums)
+nums * 2
+```
+
+# Summary Statistics
+
+```{r summary}
+values <- c(3.1, 7.4, 2.9, 8.6, 5.0, 4.2, 6.8)
+
+mean(values)
+median(values)
+sd(values)
+range(values)
+summary(values)
+```
+
+# Data Frames
+
+Data frames store tabular data. Here we create a small one from scratch.
+
+```{r data-frame}
+df <- data.frame(
+    name  = c("Alice", "Bob", "Carol", "Dave"),
+    score = c(88, 73, 95, 61),
+    grade = c("B", "C", "A", "D")
+)
+df
+```
+
+Access columns with `$` and filter rows with logical indexing.
+
+```{r data-frame-access}
+# Column access
+df$score
+
+# Filter rows where score is above 75
+df[df$score > 75, ]
+```
+
+# Basic Visualization
+
+R's built-in `plot()` function produces quick graphics.
+
+```{r plot}
+x_vals <- seq(0, 2 * pi, length.out = 100)
+y_vals <- sin(x_vals)
+
+plot(
+    x_vals, y_vals,
+    type = "l",
+    xlab = "x", ylab = "sin(x)",
+    main = "Sine Wave"
+)
+```
+
+A simple bar chart of the scores from the data frame above:
+
+```{r barplot}
+barplot(
+    df$score,
+    names.arg = df$name,
+    ylab = "Score",
+    main = "Student Scores",
+    col  = "steelblue"
+)
+```
+
+# String Manipulation
+
+```{r strings}
+greeting <- "Hello, AnVIL!"
+nchar(greeting)
+toupper(greeting)
+gsub("AnVIL", "World", greeting)
+```
+
+# Control Flow
+
+```{r control-flow}
+for (i in 1:5) {
+    if (i %% 2 == 0) {
+        message(i, " is even")
+    } else {
+        message(i, " is odd")
+    }
+}
+```
+
+# Functions
+
+User-defined functions encapsulate reusable logic.
+
+```{r functions}
+square_root_sum <- function(a, b) {
+    sqrt(a) + sqrt(b)
+}
+
+square_root_sum(9, 16)
+square_root_sum(2, 8)
+```
+
+# Session Information
+
+```{r session-info}
+sessionInfo()
+```
