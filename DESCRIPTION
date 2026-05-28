@@ -1,6 +1,6 @@
 Package: AnVILPublish
 Title: Publish Packages and Other Resources to AnVIL Workspaces
-Version: 1.23.3
+Version: 1.23.4
 Authors@R: c(
     person(
         "Marcel", "Ramos", role = c("aut", "cre"),
@@ -56,5 +56,5 @@ Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 VignetteBuilder: knitr
 Config/testthat/edition: 3
-Date: 2026-05-27
+Date: 2026-05-28
 Config/roxygen2/version: 8.0.0
