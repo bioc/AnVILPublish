@@ -182,11 +182,18 @@ as_notebook <-
         if (.quarto_exists()) {
             notebooks <- .rmd_to_quarto(rmd_paths, quarto)
         } else {
-            stop(
-                "The system installation of the 'quarto' CLI via",
-                " `Sys.which('quarto')` was not found;",
-                " install Quarto from https://quarto.org/docs/get-started/"
-            )
+            if (dry.run)
+                message(
+                    "dry.run = TRUE: ",
+                    "The 'quarto' CLI is not available; ",
+                    "notebooks will not be rendered as .ipynb files"
+                )
+            else
+                stop(
+                    "The system installation of the 'quarto' CLI via",
+                    " `Sys.which('quarto')` was not found;",
+                    " install Quarto from https://quarto.org/docs/get-started/"
+                )
         }
     }
     if (type %in% c('rmd', 'both')) {
