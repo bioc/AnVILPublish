@@ -4,17 +4,23 @@ test_that("'.vignette_paths()' finds Qmd and Rmd notebooks", {
     ## rmd only
     rmd_vignette <- tempfile(tmpdir = vignettes, fileext = ".Rmd")
     writeLines("", rmd_vignette)
-    expect_identical(.vignette_paths(package), rmd_vignette)
+    expect_identical(
+        .vignette_paths(package), normalizePath(rmd_vignette)
+    )
     ## rmd + qmd
     qmd_vignette <- tempfile(tmpdir = vignettes, fileext = ".Qmd")
     writeLines("", qmd_vignette)
     expect_identical(
         .vignette_paths(package),
-        sort(c(rmd_vignette, qmd_vignette))
+        c(rmd_vignette, qmd_vignette) |>
+            normalizePath() |>
+            sort()
     )
     ## qmd only
     unlink(rmd_vignette)
-    expect_identical(.vignette_paths(package), qmd_vignette)
+    expect_identical(
+        .vignette_paths(package), normalizePath(qmd_vignette)
+    )
 })
 
 test_that("'.notebook_title_from_*()' work", {

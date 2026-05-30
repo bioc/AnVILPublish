@@ -17,6 +17,7 @@
             call. = FALSE
         )
 
+    vignettes <- normalizePath(vignettes)
     ## use `_bookdown.yml` to order vignettes, if available
     bookdown_path <- file.path(path, "_bookdown.yml")
     if (file.exists(bookdown_path)) {
